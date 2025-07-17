@@ -130,7 +130,7 @@ bool isGlobalOffTime() {
 
 void handleRoot() {
   // Get URL parameters
-  String redirectURL = server.hasArg("redirectURL") ? server.arg("redirectURL") : "";
+  String redirectURL = server.hasArg("redirectURl") ? server.arg("redirectURl") : "";
   String timeoutStr = server.hasArg("timeout") ? server.arg("timeout") : "300"; // Default 5 minutes
   
   // Create dynamic HTML with parameters
