@@ -49,7 +49,6 @@ h1 { margin: 20px 0; }
 #offButton { background-color: #3498db; text-align: center; }
 #inactivity-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 40, 31, 0.9); z-index: 1000; justify-content: center; align-items: center; flex-direction: column; }
 #inactivity-overlay .message { font-size: 2.5em; color: #fff; text-align: center; padding: 20px; }
-.time-display { font-size: 1.2em; margin: 10px 0; color: #fff; }
 .schedule-info { font-size: 0.9em; margin: 5px 0; color: #ccc; }
 </style>
 <script>
@@ -75,11 +74,7 @@ function updateRelayStates() {
     }
   });
 }
-function updateTime() {
-  fetch('/time').then(response => response.text()).then(time => {
-    document.getElementById('current-time').textContent = 'Current Time: ' + time;
-  });
-}
+
 function controlRelay(relayNum) {
   fetch('/relay?num=' + relayNum).then(() => { updateRelayStates(); });
 }
@@ -90,12 +85,10 @@ function controlRelay(relayNum) {
      window.location.href = "https://test-drab-five-93.vercel.app/";
    });
  }
-window.addEventListener('load', () => {
-  updateRelayStates();
-  updateTime();
-  setInterval(updateRelayStates, 1000);
-  setInterval(updateTime, 30000); // Update time every 30 seconds
-  resetInactivityTimer();
+ window.addEventListener('load', () => {
+   updateRelayStates();
+   setInterval(updateRelayStates, 1000);
+   resetInactivityTimer();
   ['mousemove', 'mousedown', 'click', 'keypress', 'scroll', 'touchstart'].forEach(event => {
     document.addEventListener(event, resetInactivityTimer, true);
   });
@@ -104,7 +97,6 @@ window.addEventListener('load', () => {
 </head>
 <body>
 <h1>Choose an Appliance!</h1>
-<div id="current-time" class="time-display">Current Time: Loading...</div>
 <div class="schedule-info">Lava Lamp Auto-On: 12:00 AM - 9:00 AM | Global Off: 12:00 AM - 6:00 AM</div>
 <img src="/ElectricityButton.gif" alt="Electricity Button" style="max-width: 20%; height: auto; margin-top: 20px;" />
 <button id="relay1" class="button" onclick="controlRelay(1)">1. Lava Lamp</button>
@@ -202,12 +194,7 @@ void handleRoot() {
   server.send(200, "text/html", htmlContent);
 }
 
-void handleTime() {
-  struct tm currentTime = getCurrentTime();
-  char timeStr[64];
-  strftime(timeStr, sizeof(timeStr), "%Y-%m-%d %H:%M:%S %Z", &currentTime);
-  server.send(200, "text/plain", String(timeStr));
-}
+
 
 void handleRelayControl() {
   if (inactive) {
@@ -340,7 +327,6 @@ void setup() {
   server.on("/", handleRoot);
   server.on("/relay", handleRelayControl);
   server.on("/relayStates", handleRelayStates);
-  server.on("/time", handleTime);
   server.on("/status", handleStatus);
   server.on("/inactive", handleInactive);
   server.on("/turnOffActive", handleTurnOffActive);
