@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+main {
+    padding: 40px;
+}
+
+.checklist-section {
+    margin-bottom: 40px;
+}
+
+.checklist-section h2 {
+    color: #1976D2;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.checklist {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.checklist-item:last-child {
+    border-bottom: none;
+}
+
+.checklist-item:hover {
+    background: rgba(33, 150, 243, 0.05);
+    border-radius: 8px;
+    margin: 0 -10px;
+    padding: 15px 10px;
+}
+
+.checklist-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    accent-color: #2196F3;
+    cursor: pointer;
+}
+
+.checklist-item label {
+    font-size: 1.1em;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.checklist-item input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.progress {
+    text-align: center;
+}
+
+.progress-bar {
+    background: #e9ecef;
+    border-radius: 10px;
+    height: 20px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#progressText {
+    color: #1976D2;
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.controller-section {
+    text-align: center;
+}
+
+.appliance-btn {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.2em;
+    font-weight: 500;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
+    letter-spacing: 1px;
+}
+
+.appliance-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(33, 150, 243, 0.4);
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+}
+
+.appliance-btn:active {
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    main {
+        padding: 30px 20px;
+    }
+    
+    .checklist {
+        padding: 20px;
+    }
+    
+    .appliance-btn {
+        padding: 15px 30px;
+        font-size: 1.1em;
+    }
+} 

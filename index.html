@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Checklist App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Test Checklist</h1>
+        </header>
+        
+        <main>
+            <div class="checklist-section">
+                <h2>Daily Tasks</h2>
+                <div class="checklist">
+                    <div class="checklist-item">
+                        <input type="checkbox" id="task1">
+                        <label for="task1">Check system status</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="task2">
+                        <label for="task2">Review logs</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="task3">
+                        <label for="task3">Update configurations</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="task4">
+                        <label for="task4">Backup data</label>
+                    </div>
+                    <div class="checklist-item">
+                        <input type="checkbox" id="task5">
+                        <label for="task5">Monitor performance</label>
+                    </div>
+                </div>
+                
+                <div class="progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span id="progressText">0 of 5 completed</span>
+                </div>
+            </div>
+            
+            <div class="controller-section">
+                <button class="appliance-btn" onclick="redirectToAppliance()">
+                    Appliance Controller
+                </button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
