@@ -27,6 +27,7 @@ export default async function handler(req, res) {
       headers: {
         'User-Agent': 'Vercel-Proxy/1.0',
         'Accept': '*/*',
+        'ngrok-skip-browser-warning': 'true', // Skip ngrok browser warning
       },
       timeout: 10000, // 10 second timeout
     };
