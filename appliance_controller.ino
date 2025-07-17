@@ -8,8 +8,8 @@
 // Oberlin College WiFi Network: ObieConnect, Password: 122ElmStreet, IP: 10.17.192.136
 // Petersen Home WiFi Network: London, Password: Petersen, IP: 192.168.0.236 
 #ifndef STASSID
-#define STASSID "London"  // Your Wi-Fi SSID
-#define STAPSK "Petersen" // Your Wi-Fi Password
+#define STASSID "ObieConnect"
+#define STAPSK "122ElmStreet"
 #endif
 
 const char* ssid = STASSID;
