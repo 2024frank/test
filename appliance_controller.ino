@@ -128,6 +128,13 @@ bool isGlobalOffTime() {
   return (hour >= offStartHour && hour < offEndHour);
 }
 
+bool isLavaLampAutoTime() {
+  time_t now = time(nullptr);
+  struct tm* currentTime = localtime(&now);
+  int hour = currentTime->tm_hour;
+  return (hour >= offStartHour && hour < offEndHour); // Same as global off time: midnight to 6 AM
+}
+
 void handleRoot() {
   // Get URL parameters
   String redirectURL = server.hasArg("redirectURl") ? server.arg("redirectURl") : "";
@@ -300,7 +307,12 @@ void loop() {
   server.handleClient();
 
   if (isGlobalOffTime()) {
-    turnOffAllRelays();
+    // During global off time (midnight to 6 AM):
+    // - Turn OFF all relays except lava lamp (relay 1)
+    // - Turn ON lava lamp automatically
+    for (int i = 0; i < numRelays; i++) {
+      digitalWrite(relayPins[i], (i == 0) ? LOW : HIGH); // Relay 1 (index 0) ON, others OFF
+    }
     delay(1000);
     return;
   }
