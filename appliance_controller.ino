@@ -16,7 +16,7 @@ const int numRelays = sizeof(relayPins) / sizeof(relayPins[0]);
 
 // Global off time for relays *other than* the lava lamp
 const int offStartHour = 0; // 12 AM
-const int offEndHour = 1;   // 1 AM
+const int offEndHour = 6;   // 6 AM
 
 // Lava lamp schedule: ON from 12 AM to 9 AM
 const int lavaLampOnStart = 0;  // 12 AM
@@ -105,7 +105,7 @@ window.addEventListener('load', () => {
 <body>
 <h1>Choose an Appliance!</h1>
 <div id="current-time" class="time-display">Current Time: Loading...</div>
-<div class="schedule-info">Lava Lamp Auto-On: 12:00 AM - 9:00 AM | Global Off: 12:00 AM - 1:00 AM</div>
+<div class="schedule-info">Lava Lamp Auto-On: 12:00 AM - 9:00 AM | Global Off: 12:00 AM - 6:00 AM</div>
 <img src="/ElectricityButton.gif" alt="Electricity Button" style="max-width: 20%; height: auto; margin-top: 20px;" />
 <button id="relay1" class="button" onclick="controlRelay(1)">1. Lava Lamp</button>
 <button id="relay2" class="button" onclick="controlRelay(2)">2. Light-Incandescent</button>
@@ -176,7 +176,7 @@ void applyTimeSchedules() {
     }
   }
 
-  // Rule 2: Global Off Time (12:00 AM to 12:59 AM) - affects all except lava lamp
+  // Rule 2: Global Off Time (12:00 AM to 5:59 AM) - affects all except lava lamp
   if (isGlobalOffTime()) {
     for (int i = 1; i < numRelays; i++) { // Start from 1 to skip lava lamp
       if (relayStates[i] && !manualOverride[i]) {
