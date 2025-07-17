@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const ESP32_BASE_URL = 'http://10.17.192.136';
+  const ESP32_BASE_URL = 'https://7f3fba178d22.ngrok-free.app';
   
   try {
     // Get the path from query parameters, default to root
