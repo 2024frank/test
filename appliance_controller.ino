@@ -129,7 +129,71 @@ bool isGlobalOffTime() {
 }
 
 void handleRoot() {
-  server.send(200, "text/html", htmlContent);
+  // Get URL parameters
+  String redirectURL = server.hasArg("redirectURL") ? server.arg("redirectURL") : "";
+  String timeoutStr = server.hasArg("timeout") ? server.arg("timeout") : "300"; // Default 5 minutes
+  
+  // Create dynamic HTML with parameters
+  String dynamicHtml = htmlContent;
+  
+  // Replace placeholder with redirect functionality if URL provided
+  if (redirectURL.length() > 0) {
+    String redirectScript = "<script>"
+                          "var redirectURL = '" + redirectURL + "';"
+                          "var timeoutSeconds = " + timeoutStr + ";"
+                          "var countdownTimer;"
+                          "var remainingTime = timeoutSeconds;"
+                          ""
+                          "function startRedirectCountdown() {"
+                          "  if (redirectURL && timeoutSeconds > 0) {"
+                          "    updateCountdownDisplay();"
+                          "    countdownTimer = setInterval(function() {"
+                          "      remainingTime--;"
+                          "      updateCountdownDisplay();"
+                          "      if (remainingTime <= 0) {"
+                          "        clearInterval(countdownTimer);"
+                          "        window.location.href = redirectURL;"
+                          "      }"
+                          "    }, 1000);"
+                          "  }"
+                          "}"
+                          ""
+                          "function updateCountdownDisplay() {"
+                          "  var minutes = Math.floor(remainingTime / 60);"
+                          "  var seconds = remainingTime % 60;"
+                          "  var display = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;"
+                          "  var countdownElement = document.getElementById('countdown');"
+                          "  if (countdownElement) {"
+                          "    countdownElement.textContent = 'Redirecting in: ' + display;"
+                          "  }"
+                          "}"
+                          ""
+                          "function cancelRedirect() {"
+                          "  if (countdownTimer) {"
+                          "    clearInterval(countdownTimer);"
+                          "    var countdownElement = document.getElementById('countdown');"
+                          "    if (countdownElement) {"
+                          "      countdownElement.textContent = 'Redirect cancelled';"
+                          "    }"
+                          "  }"
+                          "}"
+                          ""
+                          "// Start countdown when page loads"
+                          "window.addEventListener('load', function() {"
+                          "  setTimeout(startRedirectCountdown, 1000);" // Start after 1 second
+                          "});"
+                          "</script>";
+    
+    // Insert redirect script before closing head tag
+    dynamicHtml.replace("</head>", redirectScript + "</head>");
+    
+    // Add countdown display after title
+    String countdownHtml = "<div id='countdown' style='color: #fff; font-size: 1.2em; margin: 10px 0; font-weight: bold;'></div>"
+                          "<button onclick='cancelRedirect()' style='background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin: 10px; cursor: pointer;'>Cancel Redirect</button>";
+    dynamicHtml.replace("<h1>Choose an Appliance!</h1>", "<h1>Choose an Appliance!</h1>" + countdownHtml);
+  }
+  
+  server.send(200, "text/html", dynamicHtml);
 }
 
 void handleRelayControl() {
