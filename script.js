@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function() {
     updateProgress();
 });
 
-// Function to redirect to appliance controller
+// Function to redirect to appliance controller via proxy
 function redirectToAppliance() {
     // Add a small delay for the button animation
     setTimeout(() => {
-        window.location.href = 'http://10.17.192.136/';
+        window.location.href = '/api/appliance';
     }, 200);
 } 

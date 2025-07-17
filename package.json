@@ -1,0 +1,24 @@
+{
+  "name": "checklist-app-with-proxy",
+  "version": "1.0.0",
+  "description": "Checklist web app with ESP32 appliance controller proxy",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step needed for static files'",
+    "start": "vercel dev"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "keywords": [
+    "checklist",
+    "esp32",
+    "proxy",
+    "vercel"
+  ]
+} 
